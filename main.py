@@ -1,4 +1,3 @@
-import uvicorn 
 from typing import Union
 from fastapi import FastAPI, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware 
@@ -44,6 +43,3 @@ async def download(background_tasks: BackgroundTasks, url: str):
     response = FileResponse(filename, media_type='video/mp4')
 
     return response
-
-if __name__ == "__main__":
-    uvicorn.run(app, host='0.0.0.0', port=8000)
