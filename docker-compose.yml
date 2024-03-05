@@ -6,4 +6,6 @@ services:
     ports:
       - "5353:8000"
     restart: unless-stopped
-    
+    container_name: DiverseDownloaderAPI
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
