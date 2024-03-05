@@ -2,7 +2,7 @@ from typing import Union
 from fastapi import FastAPI, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware 
 from fastapi.responses import FileResponse
-from fastapi.staticfiles import StaticFiles
+from fastapi.responses import PlainTextResponse
 import yt_dlp
 import random
 import os
@@ -23,6 +23,11 @@ app.add_middleware(
 def remove_file(path: str):
     time.sleep(120)
     os.remove(path)
+
+@app.get('/robots.txt', response_class=PlainTextResponse, include_in_schema=False)
+def robots():
+    data = """User-agent: *\nDisallow: /"""
+    return data
 
 @app.get("/download")
 async def download(background_tasks: BackgroundTasks, url: str):
