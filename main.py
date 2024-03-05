@@ -35,7 +35,7 @@ async def download(background_tasks: BackgroundTasks, url: str):
     random_hash = random.getrandbits(128)
     filename = f"downloads/{random_hash}.mp4"
     ydl_opts = {
-        "format": "bestvideo[height<=?1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=?1080][ext=mp4]",
+        "format": "bestvideo[height<=?720][ext=mp4]+bestaudio[ext=m4a]/best[height<=?720][ext=mp4]",
         "audio-quality": 0,
         "outtmpl": filename,
     }
