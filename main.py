@@ -43,11 +43,17 @@ async def download(background_tasks: BackgroundTasks, url: str):
         return Response(content="URL is required", status_code=HTTP_400_BAD_REQUEST)
 
     filename = f"downloads/{uuid.uuid4()}.mp4"
-    ydl_opts = {
-        "format": "bestvideo[height<=?1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=?1080][ext=mp4]",
-        "audio-quality": 0,
-        "outtmpl": filename,
-    }
+    if "tiktok.com" in url:
+        ydl_opts = {
+            "format": "0",
+            "outtmpl": filename,
+        }
+    else:
+        ydl_opts = {
+            "format": "bestvideo[height<=?1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=?1080][ext=mp4]",
+            "audio-quality": 0,
+            "outtmpl": filename,
+        }
     
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
